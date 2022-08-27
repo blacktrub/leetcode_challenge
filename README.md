@@ -7,31 +7,31 @@
 - http://e-maxx.ru/algo/
 
 ## Books 
-- Grokking Algorithms
-- Introduction To Algorithms, Thomas H Cormen
+[ ] Grokking Algorithms
+[ ] Introduction To Algorithms, Thomas H Cormen
 
 ## Complexities
-- Time Complexity
-- Space Complexity
-- Big-O Notation (Ο)
-- Omega Notation (Ω)
-- Theta Notation (θ)
+[ ] Time Complexity
+[ ] Space Complexity
+[ ] Big-O Notation (Ο)
+[ ] Omega Notation (Ω)
+[ ] Theta Notation (θ)
 
 ## Topics
-- Arrays
-- Linked List
-- String
-- Hash Table
-- Queue and Stack
-- Heap
-- Binary Search
-- Recursion
-- Binary Tree
-- Dynamic Programming
-- Graph
-- Two pointers
-- Sliding Window
-- Binary Search
-- Depth-First Search
-- Breadth-First Search
+[ ] Arrays
+[ ] Linked List
+[ ] String
+[ ] Hash Table
+[ ] Queue and Stack
+[ ] Heap
+[ ] Binary Search
+[ ] Recursion
+[ ] Binary Tree
+[ ] Dynamic Programming
+[ ] Graph
+[ ] Two pointers
+[ ] Sliding Window
+[ ] Binary Search
+[ ] Depth-First Search
+[ ] Breadth-First Search
 
