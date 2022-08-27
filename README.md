@@ -1,10 +1,10 @@
 ## Useful links
-https://leetcode.com/ 
-https://leetcode.com/explore/ 
-https://www.geeksforgeeks.org/dynamic-programming/?ref=ghm
-https://www.geeksforgeeks.org/complete-roadmap-to-learn-dsa-from-scratch/
-https://ru.algorithmica.org/cs/complexity/asymptotic/ 
-http://e-maxx.ru/algo/
+- https://leetcode.com/ 
+- https://leetcode.com/explore/ 
+- https://www.geeksforgeeks.org/dynamic-programming/?ref=ghm
+- https://www.geeksforgeeks.org/complete-roadmap-to-learn-dsa-from-scratch/
+- https://ru.algorithmica.org/cs/complexity/asymptotic/ 
+- http://e-maxx.ru/algo/
 
 ## Books 
 - Grokking Algorithms
