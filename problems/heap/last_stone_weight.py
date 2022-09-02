@@ -28,21 +28,25 @@ TODO: finish me
 
 
 from typing import List
+from heapq import heappop, heappush
 
 
 class Solution:
     def lastStoneWeight(self, stones: List[int]) -> int:
-        while len(stones) > 1:
-            stones = sorted(stones)
-            y = stones.pop()
-            x = stones.pop()
+        heap = []
+        for s in stones:
+            heappush(heap, -s)
+
+        while len(heap) > 1:
+            y = abs(heappop(heap))
+            x = abs(heappop(heap))
             if x == y:
                 pass
             else:
                 y = y - x
-                stones.append(y)
+                heappush(heap, -y)
 
-        return stones[0] if stones else 0
+        return abs(heap[0]) if heap else 0
 
 
 if __name__ == "__main__":
