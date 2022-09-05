@@ -29,11 +29,27 @@ class Solution:
         for n in nums:
             mem[n] = mem.get(n, 0) + 1
 
-        out = sorted(list(mem.items()), key=lambda x: x[1], reverse=True)
-        return [x for x, _ in out[:k]]
+        bucket = []
+        for _ in range(len(nums) + 1):
+            bucket.append([])
+
+        for key, val in mem.items():
+            bucket[val].append(key)
+
+        out = []
+        for x in range(len(bucket) - 1, -1, -1):
+            item = bucket[x]
+            for y in item:
+                out.append(y)
+                if len(out) == k:
+                    return out
+
+        return out
 
 
 if __name__ == "__main__":
     s = Solution()
-    v = s.topKFrequent([1, 1, 1, 2, 2, 3], 2)
-    assert v == [1, 2], v
+    # v = s.topKFrequent([1, 1, 1, 2, 2, 3], 2)
+    # assert v == [1, 2], v
+    v = s.topKFrequent([1], 1)
+    assert v == [1], v
