@@ -11,38 +11,28 @@ class Solution:
     def addTwoNumbers(
         self, l1: Optional[ListNode], l2: Optional[ListNode]
     ) -> Optional[ListNode]:
-        head = ListNode()
-        additional = 0
-        cur = head
-        while l1 or l2:
-            s = additional
-            if l1:
-                s += l1.val
-            if l2:
-                s += l2.val
+        def merge(first, second, add=0):
+            if not first and not second:
+                return ListNode(add) if add else None
 
-            additional = 0
+            sm = 0 + add
+            if first:
+                sm += first.val
+            if second:
+                sm += second.val
 
-            if s > 9:
-                s = s - 10
-                additional = 1
+            add = sm // 10
+            sm = sm % 10
 
-            cur.val = s
-            if (l1 and l1.next) or (l2 and l2.next):
-                cur.next = ListNode()
-                cur = cur.next
+            node = ListNode(sm)
+            node.next = merge(
+                first.next if first else None,
+                second.next if second else None,
+                add,
+            )
+            return node
 
-            if l1:
-                l1 = l1.next
-
-            if l2:
-                l2 = l2.next
-
-        if additional:
-            node = ListNode(additional)
-            cur.next = node
-
-        return head
+        return merge(l1, l2)
 
 
 if __name__ == "__main__":
@@ -63,6 +53,5 @@ if __name__ == "__main__":
 
     ans = s.addTwoNumbers(head1, head2)
     for x in (7, 0, 8):
-        print(x, ans.val)
         assert ans.val == x
         ans = ans.next
