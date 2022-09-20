@@ -32,23 +32,29 @@ from typing import List
 
 class Solution:
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        candidates.sort()
         res, sub = [], []
 
         def combinate(i, total):
-            if i >= len(candidates):
-                return
-
             if total == target:
                 res.append(sub.copy())
+                return
+
+            if i >= len(candidates):
                 return
 
             if total > target:
                 return
 
+            elem = candidates[i]
             sub.append(candidates[i])
             combinate(i + 1, total + candidates[i])
             sub.pop()
-            combinate(i + 1, total)
+
+            while i < len(candidates) and candidates[i] == elem:
+                i += 1
+
+            combinate(i, total)
 
         combinate(0, 0)
         return res
@@ -56,9 +62,15 @@ class Solution:
 
 if __name__ == "__main__":
     s = Solution()
-    assert s.combinationSum2([10, 1, 2, 7, 6, 1, 5], 8) == [
-        [1, 1, 6],
-        [1, 2, 5],
-        [1, 7],
-        [2, 6],
+    assert sorted(s.combinationSum2([10, 1, 2, 7, 6, 1, 5], 8)) == sorted(
+        [
+            [1, 1, 6],
+            [1, 2, 5],
+            [1, 7],
+            [2, 6],
+        ]
+    )
+    assert s.combinationSum2([1, 2, 1, 4], 4) == [
+        [1, 1, 2],
+        [4],
     ]
