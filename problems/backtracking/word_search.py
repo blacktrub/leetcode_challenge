@@ -29,60 +29,37 @@ from typing import List
 
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
-        def find_steps(first, second):
-            m, n = len(board), len(board[0])
-            steps = []
-            if second - 1 >= 0:
-                steps.append((first, second - 1))
-            if second + 1 < n:
-                steps.append((first, second + 1))
-            if first - 1 >= 0:
-                steps.append((first - 1, second))
-            if first + 1 < m:
-                steps.append((first + 1, second))
-            return steps
+        rows, cols = len(board), len(board[0])
 
-        def next_board_step(j):
-            n = len(board[0])
-            j = (j[0], j[1] + 1)
-            if j[1] >= n:
-                j = (j[0] + 1, 0)
-            return j
-
-        def find_match(i, left, right, path):
-            m, n = len(board), len(board[0])
-            if i >= len(word):
+        def find_match(i, left, right):
+            if i == len(word):
                 return True
 
-            if left >= m:
+            if (
+                left < 0
+                or right < 0
+                or left >= rows
+                or right >= cols
+                or word[i] != board[left][right]
+            ):
                 return False
 
-            if left > m and right > n:
-                return False
+            org = board[left][right]
+            board[left][right] = "-"
+            res = (
+                find_match(i + 1, left + 1, right)
+                or find_match(i + 1, left - 1, right)
+                or find_match(i + 1, left, right + 1)
+                or find_match(i + 1, left, right - 1)
+            )
+            board[left][right] = org
+            return res
 
-            if i == len(word) - 1 and word[i] == board[left][right]:
-                return True
-
-            if word[i] == board[left][right]:
-                new_path = path.copy()
-                new_path.add((left, right))
-                steps = find_steps(left, right)
-
-                for x, y in steps:
-                    if (x, y) in new_path:
-                        continue
-
-                    if word[i + 1] == board[x][y]:
-                        result = find_match(i + 1, x, y, new_path)
-                        if result:
-                            return True
-
-            if path:
-                return False
-
-            return find_match(0, *next_board_step((left, right)), set())
-
-        return find_match(0, 0, 0, set())
+        for x in range(rows):
+            for y in range(cols):
+                if find_match(0, x, y):
+                    return True
+        return False
 
 
 if __name__ == "__main__":
