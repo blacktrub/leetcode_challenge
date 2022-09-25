@@ -51,4 +51,3 @@ class Solution:
             prev = node
             node = node.next
         prev.next = None
-

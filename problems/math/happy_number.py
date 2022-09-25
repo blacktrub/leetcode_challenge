@@ -39,7 +39,7 @@ class Solution:
             if out in seen:
                 return False
             seen.add(out)
-        
+
         return True
 
 

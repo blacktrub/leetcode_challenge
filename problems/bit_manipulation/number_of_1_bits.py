@@ -48,6 +48,7 @@ class Solution:
             res += 1
         return res
 
+
 0b1011
 0b1010
 
