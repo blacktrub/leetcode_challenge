@@ -37,4 +37,5 @@
 - [ ] Breadth-First Search
 
 ## Watch me
-- [ ] https://www.youtube.com/watch?v=zU-LndSG5RE
+- [x] https://www.youtube.com/watch?v=zU-LndSG5RE
+- [ ] https://www.youtube.com/watch?v=7YK_Lxlu8ok
