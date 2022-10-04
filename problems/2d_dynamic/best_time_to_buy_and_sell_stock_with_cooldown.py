@@ -23,18 +23,27 @@ from typing import List
 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        def find(i, b, sell):
+        dp = {}
+
+        def find(i, sell):
             if i >= len(prices):
-                return b
+                return 0
 
+            key = (i, sell)
+            if key in dp:
+                return dp[key]
+
+            wait = find(i + 1, sell)
             if not sell:
-                profit = max(find(i + 1, b - prices[i], True), find(i + 1, b, sell))
+                buy = find(i + 1, True) - prices[i]
+                dp[key] = max(buy, wait)
             else:
-                profit = max(find(i + 2, b + prices[i], False), find(i + 1, b, sell))
+                sell = find(i + 2, False) + prices[i]
+                dp[key] = max(sell, wait)
 
-            return profit
+            return dp[key]
 
-        return find(0, 0, False)
+        return find(0, False)
 
 
 if __name__ == "__main__":
