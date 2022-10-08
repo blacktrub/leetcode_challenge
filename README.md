@@ -1,17 +1,20 @@
 ## Useful links
-- https://leetcode.com/ 
-- https://leetcode.com/explore/ 
+
+- https://leetcode.com/
+- https://leetcode.com/explore/
 - https://www.geeksforgeeks.org/dynamic-programming/?ref=ghm
 - https://www.geeksforgeeks.org/complete-roadmap-to-learn-dsa-from-scratch/
-- https://ru.algorithmica.org/cs/complexity/asymptotic/ 
+- https://ru.algorithmica.org/cs/complexity/asymptotic/
 - http://e-maxx.ru/algo/
 - https://neetcode.io/
 
-## Books 
+## Books
+
 - [ ] Grokking Algorithms
 - [ ] Introduction To Algorithms, Thomas H Cormen
 
 ## Complexities
+
 - [ ] Time Complexity
 - [ ] Space Complexity
 - [ ] Big-O Notation (Ο)
@@ -19,6 +22,7 @@
 - [ ] Theta Notation (θ)
 
 ## Topics
+
 - [ ] Arrays
 - [ ] Linked List
 - [ ] String
@@ -37,5 +41,6 @@
 - [ ] Breadth-First Search
 
 ## Watch me
+
 - [x] https://www.youtube.com/watch?v=zU-LndSG5RE
 - [ ] https://www.youtube.com/watch?v=7YK_Lxlu8ok
