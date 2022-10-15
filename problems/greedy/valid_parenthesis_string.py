@@ -24,63 +24,35 @@ Constraints:
 """
 
 
-opn = "("
-close = ")"
-
-
 class Solution:
     def checkValidString(self, s: str) -> bool:
-        opened = 0
-        free = 0
-        for i in range(len(s)):
-            ch = s[i]
-            if ch == opn:
-                print("opn", opened)
-                if opened > 0 and free > 0:
-                    while free > 0 and opened > 0:
-                        opened -= 1
-                        free -= 1
-
-                opened += 1
-            elif ch == "*":
-                free += 1
+        open_string = chr(40)
+        left_min, left_max = 0, 0
+        for x in range(len(s)):
+            if s[x] == open_string:
+                left_min += 1
+                left_max += 1
+            elif s[x] == "*":
+                left_min = max(0, left_min - 1)
+                left_max += 1
             else:
-                if opened <= 0:
-                    if free <= 0:
-                        return False
-                    free -= 1
-                    opened += 1
-                opened -= 1
+                left_min = max(0, left_min - 1)
+                left_max -= 1
 
-        # while opened < 0 and free > 0:
-        #     opened += 1
-        #     free -= 1
-        #
-        while opened > 0 and free > 0:
-            opened -= 1
-            free -= 1
+            if left_max < 0:
+                return False
 
-        print(opened, free)
-        return opened == 0
+        return left_min == 0 or left_max == 0
 
 
 if __name__ == "__main__":
-    # assert Solution().checkValidString("()") == True
+    assert Solution().checkValidString("()") == True
     assert Solution().checkValidString("(*)") == True
     assert Solution().checkValidString("(*))") == True
-    assert Solution().checkValidString("((*)()") == True
     assert Solution().checkValidString("((*)") == True
-    assert Solution().checkValidString("(*))") == True
     assert (
         Solution().checkValidString(
-            "(((((*(()((((*((**(((()()*)()()()*((((**)())*)*)))))))(())(()))())((*()()(((()((()*(())*(()**)()(())"
+            "(((()))())))*))())()(**(((())(()(*()((((())))*())(())*(*(()(*)))()*())**((()(()))())(*(*))*))())"
         )
         == False
     )
-    # assert Solution().checkValidString("(") == False
-    # assert (
-    #     Solution().checkValidString(
-    #         "(((((*(((((*)*(**()))))())((()))))))))((((()*)))))(((**(*)))(*)"
-    #     )
-    #     == True
-    # )
