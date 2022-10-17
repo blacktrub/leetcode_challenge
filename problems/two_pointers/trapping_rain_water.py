@@ -22,22 +22,22 @@ from typing import List
 
 class Solution:
     def trap(self, height: List[int]) -> int:
+        max_left, max_right = 0, 0
         res = 0
-        for i in range(1, max(height) + 1):
-            j = 0
-            while j < len(height):
-                if height[j] < i:
-                    j += 1
-                    continue
+        i, j = 0, len(height) - 1
+        while i != j:
+            if height[i] < height[j]:
+                if (max_left - height[i]) > 0:
+                    res += max_left - height[i]
 
-                k = j + 1
-                while k < len(height) and height[k] < i:
-                    k += 1
+                max_left = max(max_left, height[i])
+                i += 1
+            else:
+                if (max_right - height[j]) > 0:
+                    res += max_right - height[j]
 
-                if k < len(height) and height[k] >= i:
-                    res += k - j - 1
-
-                j = k
+                max_right = max(max_right, height[j])
+                j -= 1
 
         return res
 
