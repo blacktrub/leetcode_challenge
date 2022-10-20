@@ -22,8 +22,24 @@ from typing import List
 
 class Solution:
     def largestRectangleArea(self, heights: List[int]) -> int:
-        return 0
+        stack = []
+        res = 0
+        for i, h in enumerate(heights):
+            start = i
+            while stack and stack[-1][1] > h:
+                index, height = stack.pop()
+                start = min(start, index)
+                res = max(res, (i - index) * height)
+
+            stack.append((start, h))
+
+        for i, h in stack:
+            res = max(res, h * (len(heights) - i))
+
+        return res
 
 
 if __name__ == "__main__":
     assert Solution().largestRectangleArea([2, 1, 5, 6, 2, 3]) == 10
+    assert Solution().largestRectangleArea([2, 4]) == 4
+    assert Solution().largestRectangleArea([5, 4, 1, 2]) == 8
