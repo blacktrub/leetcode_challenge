@@ -23,6 +23,7 @@ Constraints:
 
 from typing import List
 from string import ascii_lowercase
+import collections
 
 
 def str_to_tuple(s):
@@ -35,13 +36,10 @@ def str_to_tuple(s):
 
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        mem = {}
+        mem = collections.defaultdict(list)
         for x in strs:
-            key = str_to_tuple("".join(sorted(x)))
-            if key in mem:
-                mem[key].append(x)
-            else:
-                mem[key] = [x]
+            key = str_to_tuple(x)
+            mem[key].append(x)
         return list(mem.values())
 
 

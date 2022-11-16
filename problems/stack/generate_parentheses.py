@@ -21,12 +21,12 @@ from typing import List
 
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
+        res = []
         stack = []
-        result = []
 
         def back(x, y):
             if x == y == n:
-                result.append("".join(stack))
+                res.append("".join(stack))
                 return
 
             if x < n:
@@ -34,13 +34,13 @@ class Solution:
                 back(x + 1, y)
                 stack.pop()
 
-            if y < x:
+            if x > y:
                 stack.append(")")
                 back(x, y + 1)
                 stack.pop()
 
         back(0, 0)
-        return result
+        return res
 
 
 if __name__ == "__main__":

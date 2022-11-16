@@ -30,13 +30,14 @@ class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         mem = {}
         for n, x in enumerate(nums):
-            d = target - x
-            if d in mem:
-                return [mem[d], n]
+            y = target - x
+            if y in mem:
+                return [mem[y], n]
             mem[x] = n
         return []
 
 
 if __name__ == "__main__":
     s = Solution()
-    assert s.twoSum([3, 2, 4], 6) == [1, 2]
+    # assert s.twoSum([3, 2, 4], 6) == [1, 2]
+    print(s.twoSum([3, 2, 4], 6))

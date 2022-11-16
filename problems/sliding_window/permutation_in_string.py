@@ -16,58 +16,63 @@ Constraints:
     s1 and s2 consist of lowercase English letters.
 """
 
-from string import ascii_lowercase
-
-
-def to_map(s):
-    out = [0] * len(ascii_lowercase)
-    for x in s:
-        out[ord(x) - 97] += 1
-    return out
-
 
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
         if len(s1) > len(s2):
             return False
 
-        l = 0
-        s1mem = to_map(s1)
-        rstart = l + len(s1) - 1
-        s2mem = to_map(s2[l : rstart + 1])
-        matches = 0
-        for i in range(len(ascii_lowercase)):
-            if s1mem[i] == s2mem[i]:
-                matches += 1
+        if len(s1) == 1:
+            return s1 in s2
 
-        for r in range(rstart + 1, len(s2)):
-            if matches == len(ascii_lowercase):
+        ch_to_idx = lambda ch: ord(ch) - ord("a")
+
+        cnt = [0] * 26
+        for ch in s1:
+            cnt[ch_to_idx(ch)] += 1
+
+        cur = [0] * 26
+        i, j = 0, len(s1)
+        for x in range(j):
+            cur[ch_to_idx(s2[x])] += 1
+
+        found = 0
+        for i in range(len(cnt)):
+            if cnt[i] == cur[i]:
+                found += 1
+
+        i = 0
+        while j < len(s2):
+            if found == 26:
                 return True
 
-            cr = s2[r]
-            nr = ord(cr) - 97
-            s2mem[nr] += 1
-            if s2mem[nr] == s1mem[nr]:
-                matches += 1
-            elif s2mem[nr] == s1mem[nr] + 1:
-                matches -= 1
+            ch = s2[j]
+            idx = ch_to_idx(ch)
+            cur[idx] += 1
 
-            cl = s2[l]
-            nl = ord(cl) - 97
-            s2mem[nl] -= 1
-            if s2mem[nl] == s1mem[nl]:
-                matches += 1
-            elif s2mem[nl] == s1mem[nl] - 1:
-                matches -= 1
-            l += 1
+            if cnt[idx] == cur[idx]:
+                found += 1
+            elif cnt[idx] + 1 == cur[idx]:
+                found -= 1
 
-        return matches == len(ascii_lowercase)
+            iidx = ch_to_idx(s2[i])
+            cur[iidx] -= 1
+            if cnt[iidx] == cur[iidx]:
+                found += 1
+            elif cnt[iidx] - 1 == cur[iidx]:
+                found -= 1
+
+            i += 1
+            j += 1
+
+        return False
 
 
 if __name__ == "__main__":
     s = Solution()
-    assert s.checkInclusion("ab", "eidbaooo") == True
-    assert s.checkInclusion("abc", "eidbcaooo") == True
-    assert s.checkInclusion("abc", "bbbca") == True
-    assert s.checkInclusion("ab", "eidboaoo") == False
-    assert s.checkInclusion("a", "ab") == True
+    assert s.checkInclusion("adc", "dcda") == True
+    # assert s.checkInclusion("ab", "eidbaooo") == True
+    # assert s.checkInclusion("abc", "eidbcaooo") == True
+    # assert s.checkInclusion("abc", "bbbca") == True
+    # assert s.checkInclusion("ab", "eidboaoo") == False
+    # assert s.checkInclusion("a", "ab") == True

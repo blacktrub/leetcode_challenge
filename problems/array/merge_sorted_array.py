@@ -38,9 +38,6 @@ from typing import List
 
 class Solution:
     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
-        """
-        Do not return anything, modify nums1 in-place instead.
-        """
         if not n:
             return
 
@@ -65,14 +62,14 @@ if __name__ == "__main__":
     # s.merge(nums1, m, nums2, n)
     # assert nums1 == [1, 2, 2, 3, 5, 6], nums1
     #
-    # nums1 = [0]
-    # nums2 = [1]
-    # m, n = 0, 1
-    # s.merge(nums1, m, nums2, n)
-    # assert nums1 == [1], nums1
-
+    # # nums1 = [0]
+    # # nums2 = [1]
+    # # m, n = 0, 1
+    # # s.merge(nums1, m, nums2, n)
+    # # assert nums1 == [1], nums1
+    #
     nums1 = [2, 0]
     nums2 = [1]
     m, n = 1, 1
     s.merge(nums1, m, nums2, n)
-    assert nums1 == [2, 1], nums1
+    assert nums1 == [1, 2], nums1
