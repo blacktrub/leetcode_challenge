@@ -38,3 +38,31 @@ if __name__ == "__main__":
         out.append(i._next())
 
     assert out == [1, 4]
+
+    i = ZigzagIterator([1], [])
+    out = []
+    while i.hasNext():
+        out.append(i._next())
+
+    assert out == [1]
+
+    i = ZigzagIterator([], [1])
+    out = []
+    while i.hasNext():
+        out.append(i._next())
+
+    assert out == [1]
+
+    i = ZigzagIterator([1, 2, 3], [1])
+    out = []
+    while i.hasNext():
+        out.append(i._next())
+
+    assert out == [1, 1, 2, 3]
+
+    i = ZigzagIterator([1], [1, 2, 3])
+    out = []
+    while i.hasNext():
+        out.append(i._next())
+
+    assert out == [1, 1, 2, 3]

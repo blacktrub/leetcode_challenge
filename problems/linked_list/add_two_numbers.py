@@ -16,19 +16,14 @@ class Solution:
                 return ListNode(add) if add else None
 
             sm = 0 + add
-            if first:
-                sm += first.val
-            if second:
-                sm += second.val
+            sm += first.val if first else 0
+            sm += second.val if second else 0
 
-            add = sm // 10
-            sm = sm % 10
-
-            node = ListNode(sm)
+            node = ListNode(sm % 10)
             node.next = merge(
                 first.next if first else None,
                 second.next if second else None,
-                add,
+                sm // 10,
             )
             return node
 

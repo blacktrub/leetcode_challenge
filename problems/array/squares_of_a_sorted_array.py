@@ -25,45 +25,22 @@ Tags: Merge Sort
 from typing import List
 
 
-def merge_sort(arr):
-    if len(arr) < 2:
-        return arr
-
-    mid = len(arr) // 2
-    left_array = merge_sort(arr[:mid])
-    right_array = merge_sort(arr[mid:])
-
-    i = j = k = 0
-    while i < len(left_array) and j < len(right_array):
-        l, r = left_array[i], right_array[j]
-        if l < r:
-            arr[k] = l
-            i += 1
-        else:
-            arr[k] = r
-            j += 1
-        k += 1
-
-    while i < len(left_array):
-        l = left_array[i]
-        arr[k] = l
-        i += 1
-        k += 1
-
-    while j < len(right_array):
-        r = right_array[j]
-        arr[k] = r
-        j += 1
-        k += 1
-
-    return arr
-
-
 class Solution:
     def sortedSquares(self, nums: List[int]) -> List[int]:
-        for i in range(len(nums)):
-            nums[i] = nums[i] * nums[i]
-        return merge_sort(nums)
+        res = [0] * len(nums)
+        l, r = 0, len(nums) - 1
+        end = len(nums) - 1
+
+        while l <= r:
+            x, y = nums[l]**2, nums[r]**2
+            if x > y:
+                res[end] = x
+                l += 1
+            else:
+                res[end] = y
+                r -= 1
+            end -= 1
+        return res
 
 
 if __name__ == "__main__":

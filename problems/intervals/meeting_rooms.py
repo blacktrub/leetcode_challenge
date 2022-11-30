@@ -38,14 +38,11 @@ class Solution:
             return True
 
         intervals.sort(key=lambda x: x.start)
-        mn, mx = intervals[0].start, intervals[0].end
+        prev = intervals[0].end
         for p in intervals[1:]:
-            if p.end <= mn:
-                mn = p.start
-            elif p.start >= mx:
-                mx = p.end
-            else:
+            if p.start < prev:
                 return False
+            prev = p.end
         return True
 
 

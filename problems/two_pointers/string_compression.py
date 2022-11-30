@@ -3,36 +3,23 @@ from typing import List
 
 class Solution:
     def compress(self, chars: List[str]) -> int:
-        prev, start = chars[0], 0
-        for i in range(1, len(chars)):
-            ch = chars[i]
-            if ch != prev:
-                start = i
-                prev = chars[i]
-            else:
-                chars[start] += ch
-                chars[i] = ""
+        slow, fast = 0, 0
+        while fast < len(chars):
+            chars[slow] = chars[fast]
+            count = 1
+            while fast + 1 < len(chars) and chars[fast] == chars[fast + 1]:
+                fast += 1
+                count += 1
 
-        i = 0
-        while i < len(chars):
-            print("ti", chars[i])
-            if chars[i] == "":
-                i += 1
-                continue
+            if count > 1:
+                for c in str(count):
+                    slow += 1
+                    chars[slow] = c
 
-            if len(chars[i]) == 1:
-                i += 1
-                continue
+            fast += 1
+            slow += 1
 
-            group = chars[i]
-            chars[i] = group[0]
-            j = i + 1
-            for n in str(len(group)):
-                chars[j] = n
-                j+=1
-            i += 2
-
-        return len([x for x in chars if x != ""])
+        return slow
 
 
 if __name__ == "__main__":

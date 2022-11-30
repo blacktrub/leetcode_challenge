@@ -30,40 +30,58 @@ class TreeNode:
 
 class Solution:
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
-        cache = {}
+        res = root.val
 
-        def max_path(root):
+        def dfs(root):
             if not root:
-                return float("-infinity")
+                return 0
 
-            left, right = max_path(root.left), max_path(root.right)
-            cache[id(root)] = max(
-                root.val + (left if left > 0 else 0) + (right if right > 0 else 0),
-                left,
-                right,
-                root.val,
-            )
+            left = max(dfs(root.left), 0)
+            right = max(dfs(root.right), 0)
+            nonlocal res
+            res = max(res, root.val + left + right)
+            return root.val + max(left, right)
 
-            return max(
-                root.val + right,
-                root.val + left,
-                root.val,
-            )
+        dfs(root)
+        return res
 
-        def max_sum(root):
-            if not root:
-                return float("-infinity")
 
-            if id(root) in cache:
-                s = cache[id(root)]
-            else:
-                s = root.val
-                s += max(max_path(root.left), 0)
-                s += max(max_path(root.right), 0)
-
-            return max(s, max_sum(root.left) or s, max_sum(root.right) or s)
-
-        return max_sum(root)
+# class Solution:
+#     def maxPathSum(self, root: Optional[TreeNode]) -> int:
+#         cache = {}
+#
+#         def max_path(root):
+#             if not root:
+#                 return float("-infinity")
+#
+#             left, right = max_path(root.left), max_path(root.right)
+#             cache[id(root)] = max(
+#                 root.val + (left if left > 0 else 0) + (right if right > 0 else 0),
+#                 left,
+#                 right,
+#                 root.val,
+#             )
+#
+#             return max(
+#                 root.val + right,
+#                 root.val + left,
+#                 root.val,
+#             )
+#
+#         def max_sum(root):
+#             if not root:
+#                 return float("-infinity")
+#
+#             if id(root) in cache:
+#                 s = cache[id(root)]
+#             else:
+#                 s = root.val
+#                 s += max(max_path(root.left), 0)
+#                 s += max(max_path(root.right), 0)
+#
+#             return max(s, max_sum(root.left) or s, max_sum(root.right) or s)
+#
+#         return max_sum(root)
 
 
 if __name__ == "__main__":

@@ -20,8 +20,7 @@ Follow up: Suppose there are lots of incoming s, say s1, s2, ..., sk where k >= 
 
 class Solution:
     def isSubsequence(self, s: str, t: str) -> bool:
-        res = ""
-        i = j = 0
+        res = i = j = 0
         while i < len(s) and j < len(t):
             while j < len(t) and s[i] != t[j]:
                 j += 1
@@ -29,10 +28,10 @@ class Solution:
             if j >= len(t):
                 return False
 
-            res += t[j]
+            res += 1
             i += 1
             j += 1
-        return res == s
+        return res == len(s)
 
 
 if __name__ == "__main__":

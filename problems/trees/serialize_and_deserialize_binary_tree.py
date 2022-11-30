@@ -39,21 +39,21 @@ class Codec:
             return ""
 
         q = deque([root])
-        res = [root.val]
+        res = [str(root.val)]
         while q:
             n = q.popleft()
-            left = n.left.val if n.left else None
-            right = n.right.val if n.right else None
+            left = str(n.left.val) if n.left else "n"
+            right = str(n.right.val) if n.right else "n"
             res += [left, right]
             if n.left:
                 q.append(n.left)
             if n.right:
                 q.append(n.right)
 
-        while res[-1] is None:
+        while res[-1] == "n":
             res.pop()
 
-        return json.dumps(res)
+        return ",".join(res)
 
     def deserialize(self, data):
         """Decodes your encoded data to tree.
@@ -66,7 +66,7 @@ class Codec:
         if not data:
             return
 
-        nodes = json.loads(data)
+        nodes = data.split(",")
         if not nodes:
             return
 
@@ -75,10 +75,10 @@ class Codec:
         i = 1
         while q and i < len(nodes):
             n = q.popleft()
-            left = TreeNode(int(nodes[i])) if nodes[i] is not None else None
+            left = TreeNode(int(nodes[i])) if nodes[i] != "n" else None
             right = (
                 TreeNode(int(nodes[i + 1]))
-                if i + 1 < len(nodes) and nodes[i + 1] is not None
+                if i + 1 < len(nodes) and nodes[i + 1] != "n"
                 else None
             )
             n.left = left
