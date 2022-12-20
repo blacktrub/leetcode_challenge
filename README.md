@@ -8,6 +8,7 @@
 - http://e-maxx.ru/algo/
 - https://neetcode.io/
 - https://www.lintcode.com
+- https://www.geeksforgeeks.org/boyer-moore-algorithm-for-pattern-searching/
 
 ## Books
 
