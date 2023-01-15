@@ -4,6 +4,7 @@ import (
 	"strconv"
 )
 
+// TODO: doesn't work
 func minPartitions(n string) int {
 	if n == "0" {
 		return 0
