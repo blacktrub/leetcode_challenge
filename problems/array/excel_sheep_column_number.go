@@ -1,5 +1,6 @@
 package main
 
+// TODO: doesn't work
 func titleToNumber(columnTitle string) int {
 	if len(columnTitle) == 1 {
 		return int(columnTitle[0]) - 64
