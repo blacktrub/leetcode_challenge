@@ -1,10 +1,11 @@
 package main
 
+// TODO: there is a better way to find the first and the last element of the sequence
 func searchRange(nums []int, target int) []int {
 	i := 0
 	j := len(nums) - 1
 	for i <= j {
-		m := (j - i + 1) / 2
+		m := (i + j) / 2
 		if nums[m] == target {
 			for nums[i] != target {
 				i++
@@ -16,17 +17,10 @@ func searchRange(nums []int, target int) []int {
 		}
 
 		if nums[m] > target {
-			i = m + 1
-		} else {
 			j = m - 1
+		} else {
+			i = m + 1
 		}
 	}
 	return []int{-1, -1}
 }
-
-// [1,2,3]
-// t = 3
-// i = 0 j = 2
-// m = 1
-// nums[m] = 2
-// 2 > t
